@@ -1,7 +1,7 @@
 from setup import *
 import curses    # for displaying text to screen
 import time      # for time related tasts
-test
+
 #-----------------------------------------------------------------------------
 # Some little helper functions
 #-----------------------------------------------------------------------------

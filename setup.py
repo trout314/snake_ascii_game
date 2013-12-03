@@ -17,7 +17,7 @@ scr.keypad(True)       # enable special values for arrow, pageup keys etc
 #-----------------------------------------------------------------------------
 def clean_up():
     # NOTE: Uncomment this next line to see debugging messages
-    time.sleep(5)
+    time.sleep(1)
     curses.echo()
     curses.curs_set(True)
     curses.nocbreak()

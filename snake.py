@@ -80,24 +80,30 @@ spiders = [
 ]
 
 snakes = [
-    {"x":2, "y":2}, {"x":3, "y":2}, {"x":4, "y":2}, {"x":5, "y":2},
-    {"x":5, "y":3}, {"x":6, "y":3}, {"x":7, "y":3}, {"x":8, "y":3}
+    [{"x":2, "y":2}, {"x":3, "y":2}, {"x":4, "y":2}, {"x":5, "y":2}],
+    [{"x":5, "y":3}, {"x":6, "y":3}, {"x":7, "y":3}, {"x":8, "y":3}]
 ]
+
+# TO DO: Fill mushroom position list with num_mushrooms
+# number of randomly placed mushrooms
+mushrooms = [{"x":12, "y":7},{"x": 23, "y":5},{"x":68, "y":12},{"x":12, "y":15}]
     
 #-----------------------------------------------------------------------------
 # Global constants:
 #     In this section we will put data items that the whole program will need
-#     but that should not be changed.
+#     but that should not be changed during the game.
 #-----------------------------------------------------------------------------
 
 # limits for display area
 min_x, max_x = 0, 79
 min_y, max_y = 0, 23
 
+snake_head_sym = "O"
+snake_body_sym = "o"
 player_sym = "@"
 bullet_sym = "*"
-
-mushroom_syms = ["_", "m", "M"]
+spider_sym = "S"
+mushroom_sym = "M"
 
 time_delay = 0.03
 
@@ -128,9 +134,9 @@ while True:
     # Draw bullets
     draw_bullets()
 
-    # TO DO #1: draw_centipedes
-    # TO DO #2: draw_spiders
-    # TO DO #3: draw_mushrooms
+    # TO DO: draw_snakes
+    # TO DO: draw_spiders
+    # TO DO: draw_mushrooms
 
     # draw screen and then wait
     scr.refresh()
@@ -150,13 +156,15 @@ while True:
     # perform other movements
     move_bullets()
 
-    # TO DO #4: move_centipedes
-    # TO DO #5: move_spiders
+    # TO DO (BIG): move_snakes
+    # TO DO (BIG): move_spiders
     
-    # resolve consequences of collisions
+    # resolve consequences of collisions.
+    # NOTE: some of these may be best handled by putting code elsewhere
     
-    #TO DO #7)  Bullet hits snake segment (SEGMENT REMOVED, NOW TWO SNAKES) 
-    #TO DO #8)  Bullet hits spider (SPIDER REMOVED)
-    #TO DO #9)  Spider hits player (GAME OVER)
-    #TO DO #10) Centipede hits player (GAME OVER)
-    #TO DO #11) Centipede touches last playable row (GAME OVER)
+    #TO DO (BIG): Bullet hits snake segment (remove segment, now two snakes)
+    #TO DO: Bullet hits spider (spider removed)
+    #TO DO: Bullet hits mushroom (mushroom removed)
+    #TO DO: Spider hits player (game over)
+    #TO DO: Snake segment hits player (game over)
+    #TO DO: Snake segment touches last playable row (game over)

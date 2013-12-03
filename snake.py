@@ -19,25 +19,21 @@ def message(msg):
 #-----------------------------------------------------------------------------
 
 def move_player_up():
-    # put blank in current position before moving
     put(player_pos, " ")
     if player_pos["y"] > 0:
         player_pos["y"] -= 1
 
 def move_player_down():
-    # put blank in current position before moving    
     put(player_pos, " ")
-    if player_pos["y"] < max_y-1: #last line for messages
+    if player_pos["y"] < max_y-1: #last line is for messages
         player_pos["y"] += 1
 
 def move_player_left():
-    # put blank in current position before moving
     put(player_pos, " ")
     if player_pos["x"] > 0:
         player_pos["x"] -= 1
 
 def move_player_right():
-    # put blank in current position before moving
     put(player_pos, " ")
     if player_pos["x"] < max_x:
         player_pos["x"] += 1
@@ -48,7 +44,8 @@ def move_player_right():
 
 def add_bullet():
     if player_pos["y"] > 0:
-        bullets.append({"x":player_pos["x"], "y":player_pos["y"]})
+        # append a copy of the player position dictionary
+        bullets.append(dict(player_pos))
 
 def move_bullets():
     global bullets
@@ -73,13 +70,16 @@ def draw_bullets():
 #     modify.
 #-----------------------------------------------------------------------------
 
-player_pos = {"x":5, "y":6}
+player_pos = {"x":40, "y": 20}
+
 bullets = []
+
 spiders = [
     {"x":10, "y":10},
     {"x":15, "y":15}
 ]
-centipedes = [
+
+snakes = [
     {"x":2, "y":2}, {"x":3, "y":2}, {"x":4, "y":2}, {"x":5, "y":2},
     {"x":5, "y":3}, {"x":6, "y":3}, {"x":7, "y":3}, {"x":8, "y":3}
 ]
@@ -96,6 +96,8 @@ min_y, max_y = 0, 23
 
 player_sym = "@"
 bullet_sym = "*"
+
+mushroom_syms = ["_", "m", "M"]
 
 time_delay = 0.03
 
@@ -126,9 +128,9 @@ while True:
     # Draw bullets
     draw_bullets()
 
-    # TO DO: draw_centipedes
-    # TO DO: draw_spiders
-    # TO DO: draw_mushrooms
+    # TO DO #1: draw_centipedes
+    # TO DO #2: draw_spiders
+    # TO DO #3: draw_mushrooms
 
     # draw screen and then wait
     scr.refresh()
@@ -136,6 +138,8 @@ while True:
 
     # get key-press, as numerical value
     key_pressed = scr.getch()
+
+    # flush input buffer so key-presses don't acccumulate
     curses.flushinp()
 
     # perform actions associated with keys
@@ -146,13 +150,13 @@ while True:
     # perform other movements
     move_bullets()
 
-    # TO DO: move_centipedes
-
-    # TO DO: move_spiders
+    # TO DO #4: move_centipedes
+    # TO DO #5: move_spiders
     
-    # TO DO: Resolve consequences of collisions
-    #     1) Bullet hits centipede segment
-    #     2) Bullet hits a spider
-    #     3) Spider hits player
-    #     4) Centipede hits player
-    #     5) Centipede touches last playable row
+    # resolve consequences of collisions
+    
+    #TO DO #7)  Bullet hits snake segment (SEGMENT REMOVED, NOW TWO SNAKES) 
+    #TO DO #8)  Bullet hits spider (SPIDER REMOVED)
+    #TO DO #9)  Spider hits player (GAME OVER)
+    #TO DO #10) Centipede hits player (GAME OVER)
+    #TO DO #11) Centipede touches last playable row (GAME OVER)

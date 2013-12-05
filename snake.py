@@ -1,7 +1,7 @@
 from setup import *
 import curses    # for displaying text to screen
 import time      # for time related tasts
-
+import random    # for choosing a random character movement direction
 #-----------------------------------------------------------------------------
 # Some little helper functions
 #-----------------------------------------------------------------------------
@@ -75,7 +75,7 @@ player_pos = {"x":40, "y": 20}
 bullets = []
 
 spiders = [
-    {"x":10, "y":10},
+    {"x":12, "y":10},
     {"x":15, "y":15}
 ]
 
@@ -84,8 +84,6 @@ snakes = [
     [{"x":5, "y":3}, {"x":6, "y":3}, {"x":7, "y":3}, {"x":8, "y":3}]
 ]
 
-# TO DO: Fill mushroom position list with num_mushrooms
-# number of randomly placed mushrooms
 mushrooms = [{"x":12, "y":7},{"x": 23, "y":5},{"x":68, "y":12},{"x":12, "y":15}]
     
 #-----------------------------------------------------------------------------
@@ -118,6 +116,41 @@ key_actions = {
 }
 
 #-----------------------------------------------------------------------------
+#draw and move spiders
+#-----------------------------------------------------------------------------
+def draw_spiders():
+    for spider_pos in spiders:
+        put(spider_pos,spider_sym)
+
+def move_spider_up(spider_pos):
+    # put blank in current position before moving   
+    put(spider_pos, " ")
+    if spider_pos["y"] > 0:
+        spider_pos["y"] -= 1
+
+def move_spider_down(spider_pos):
+    # put blank in current position before moving    
+    put(spider_pos, " ")
+    if spider_pos["y"] < max_y-1: #last line for messages
+        spider_pos["y"] += 1
+
+def move_spider_left(spider_pos):
+    # put blank in current position before moving    
+    put(spider_pos, " ")
+    if spider_pos["x"] > 0:
+        spider_pos["x"] -= 1
+
+def move_spider_right(spider_pos):
+    # put blank in current position before moving    
+    put(spider_pos, " ")
+    if spider_pos["x"] < max_x:
+        spider_pos["x"] += 1
+
+def move_spiders():
+    for spider_pos in spiders:
+        random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spiders[0])
+        random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spiders[1])
+#-----------------------------------------------------------------------------
 # Main game code
 #-----------------------------------------------------------------------------
 
@@ -134,10 +167,9 @@ while True:
     # Draw bullets
     draw_bullets()
 
-    # TO DO: draw_snakes
-    # TO DO: draw_spiders
-    # TO DO: draw_mushrooms
-
+    # Draw spiders
+    draw_spiders()
+    
     # draw screen and then wait
     scr.refresh()
     time.sleep(time_delay)
@@ -156,15 +188,7 @@ while True:
     # perform other movements
     move_bullets()
 
-    # TO DO (BIG): move_snakes
-    # TO DO (BIG): move_spiders
+    move_spiders()
     
     # resolve consequences of collisions.
     # NOTE: some of these may be best handled by putting code elsewhere
-    
-    #TO DO (BIG): Bullet hits snake segment (remove segment, now two snakes)
-    #TO DO: Bullet hits spider (spider removed)
-    #TO DO: Bullet hits mushroom (mushroom removed)
-    #TO DO: Spider hits player (game over)
-    #TO DO: Snake segment hits player (game over)
-    #TO DO: Snake segment touches last playable row (game over)

@@ -1,7 +1,7 @@
 from setup import *
 import curses    # for displaying text to screen
 import time      # for time related tasts
-
+import random    # for choosing a random character movement direction
 #-----------------------------------------------------------------------------
 # Some little helper functions
 #-----------------------------------------------------------------------------

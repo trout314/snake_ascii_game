@@ -127,25 +127,33 @@ def move_spider_up(spider_pos):
     put(spider_pos, " ")
     if spider_pos["y"] > 0:
         spider_pos["y"] -= 1
+        if spider_pos["y"]==player_pos["y"] and spider_pos["x"]==player_pos["x"]:
+            exit()
 
 def move_spider_down(spider_pos):
     # put blank in current position before moving    
     put(spider_pos, " ")
     if spider_pos["y"] < max_y-1: #last line for messages
         spider_pos["y"] += 1
+        if spider_pos["y"]==player_pos["y"] and spider_pos["x"]==player_pos["x"]:
+            exit()
 
 def move_spider_left(spider_pos):
     # put blank in current position before moving    
     put(spider_pos, " ")
     if spider_pos["x"] > 0:
         spider_pos["x"] -= 1
+        if spider_pos["y"]==player_pos["y"] and spider_pos["x"]==player_pos["x"]:
+            exit()
 
 def move_spider_right(spider_pos):
     # put blank in current position before moving    
     put(spider_pos, " ")
     if spider_pos["x"] < max_x:
         spider_pos["x"] += 1
-
+        if spider_pos["y"]==player_pos["y"] and spider_pos["x"]==player_pos["x"]:
+            exit()
+            
 def move_spiders():
     for spider_pos in spiders:
         random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spiders[0])

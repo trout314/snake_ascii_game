@@ -1,7 +1,7 @@
 from setup import *
 import curses    # for displaying text to screen
 import time      # for time related tasts
-
+import random    # for choosing a random character movement direction
 #-----------------------------------------------------------------------------
 # Some little helper functions
 #-----------------------------------------------------------------------------
@@ -116,6 +116,41 @@ key_actions = {
 }
 
 #-----------------------------------------------------------------------------
+#draw and move spiders
+#-----------------------------------------------------------------------------
+def draw_spiders():
+    for spider_pos in spiders:
+        put(spider_pos,spider_sym)
+
+def move_spider_up(spider_pos):
+    # put blank in current position before moving   
+    put(spider_pos, " ")
+    if spider_pos["y"] > 0:
+        spider_pos["y"] -= 1
+
+def move_spider_down(spider_pos):
+    # put blank in current position before moving    
+    put(spider_pos, " ")
+    if spider_pos["y"] < max_y-1: #last line for messages
+        spider_pos["y"] += 1
+
+def move_spider_left(spider_pos):
+    # put blank in current position before moving    
+    put(spider_pos, " ")
+    if spider_pos["x"] > 0:
+        spider_pos["x"] -= 1
+
+def move_spider_right(spider_pos):
+    # put blank in current position before moving    
+    put(spider_pos, " ")
+    if spider_pos["x"] < max_x:
+        spider_pos["x"] += 1
+
+def move_spiders():
+    for spider_pos in spiders:
+        random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spiders[0])
+        random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spiders[1])
+#-----------------------------------------------------------------------------
 # Main game code
 #-----------------------------------------------------------------------------
 
@@ -132,6 +167,9 @@ while True:
     # Draw bullets
     draw_bullets()
 
+    # Draw spiders
+    draw_spiders()
+    
     # draw screen and then wait
     scr.refresh()
     time.sleep(time_delay)
@@ -150,5 +188,7 @@ while True:
     # perform other movements
     move_bullets()
 
+    move_spiders()
+    
     # resolve consequences of collisions.
     # NOTE: some of these may be best handled by putting code elsewhere

@@ -128,7 +128,7 @@ def move_spider_up(spider_pos):
     if spider_pos["y"] > 0:
         spider_pos["y"] -= 1
         if spider_pos["y"]==player_pos["y"] and spider_pos["x"]==player_pos["x"]:
-            exit()
+            exit()       
 
 def move_spider_down(spider_pos):
     # put blank in current position before moving    
@@ -153,11 +153,21 @@ def move_spider_right(spider_pos):
         spider_pos["x"] += 1
         if spider_pos["y"]==player_pos["y"] and spider_pos["x"]==player_pos["x"]:
             exit()
-            
+                           
 def move_spiders():
     for spider_pos in spiders:
-        random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spiders[0])
-        random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spiders[1])
+        random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spider_pos)
+
+def remove_spiders():
+    for bullet_pos in bullets:
+        global bullets
+        global spiders
+
+        new_spiders=[pos for pos in spiders if not pos in bullets]
+        new_bullets=[pos for pos in bullets if not pos in spiders]
+
+        spiders=new_spiders
+        bullets=new_bullets
 #-----------------------------------------------------------------------------
 # Main game code
 #-----------------------------------------------------------------------------
@@ -177,7 +187,7 @@ while True:
 
     # Draw spiders
     draw_spiders()
-    
+
     # draw screen and then wait
     scr.refresh()
     time.sleep(time_delay)
@@ -194,6 +204,8 @@ while True:
             key_actions[key]()
     
     # perform other movements
+    remove_spiders()
+
     move_bullets()
 
     move_spiders()

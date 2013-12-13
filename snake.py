@@ -158,7 +158,7 @@ def move_spiders():
     for spider_pos in spiders:
         random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spider_pos)
 
-def remove_spiders():
+def do_spider_bullet_collisions():
     global bullets
     global spiders
 
@@ -203,7 +203,7 @@ while True:
             key_actions[key]()
     
     # perform other movements
-    remove_spiders()
+    do_spider_bullet_collisions()
 
     move_bullets()
 

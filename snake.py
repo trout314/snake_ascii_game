@@ -80,8 +80,8 @@ spiders = [
 ]
 
 snakes = [
-    [{"x":12, "y":2}, {"x":13, "y":2}, {"x":14, "y":2}, {"x":15, "y":2}],
-    [{"x":5, "y":3}, {"x":6, "y":3}, {"x":7, "y":3}, {"x":8, "y":3}, {"x":9, "y":3}]
+    [{"x":12, "y":2}, {"x":13, "y":2}, {"x":14, "y":2}, {"x":15, "y":2}, {"x":16, "y":2}, {"x":17, "y":2}, {"x":18, "y":2}],
+    [{"x":9, "y":3}, {"x":8, "y":3}, {"x":7, "y":3}, {"x":6, "y":3}, {"x":5, "y":3}]
 ]
 
 mushrooms = [{"x":12, "y":7},{"x": 23, "y":5},{"x":68, "y":12},{"x":12, "y":15}]
@@ -103,7 +103,7 @@ bullet_sym = "*"
 spider_sym = "S"
 mushroom_sym = "M"
 
-time_delay = 0.5
+time_delay = 0.05
 
 key_actions = {
     'q' : exit,
@@ -123,10 +123,16 @@ def move_snakes():
     global snakes
     for snake in snakes:
         head_pos = dict(snake[-1])
-        if (head_pos["y"] % 2 == 0) and (head_pos["x"] < max_x):
+        if (head_pos["y"] % 2 == 0):
             head_pos["x"] += 1
-        elif head_pos["x"] > 0:
+            if (head_pos in mushrooms) or (head_pos["x"] > max_x):
+                head_pos["x"] -= 1
+                head_pos["y"] += 1
+        else:
             head_pos["x"] -= 1
+            if (head_pos in mushrooms) or (head_pos["x"] < 0):
+                head_pos["x"] += 1
+                head_pos["y"] += 1
 
         put(snake[0], " ")
         del snake[0]

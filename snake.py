@@ -80,11 +80,11 @@ spiders = [
 ]
 
 snakes = [
-    [{"x":12, "y":2}, {"x":13, "y":2}, {"x":14, "y":2}, {"x":15, "y":2}, {"x":16, "y":2}, {"x":17, "y":2}, {"x":18, "y":2}],
-    [{"x":9, "y":3}, {"x":8, "y":3}, {"x":7, "y":3}, {"x":6, "y":3}, {"x":5, "y":3}]
+    [{"x": i, "y": 2} for i in range(5, 25)],
+    [{"x": i, "y": 4} for i in range(20, 45)]
 ]
 
-mushrooms = [{"x":12, "y":7},{"x": 23, "y":5},{"x":68, "y":12},{"x":12, "y":15}]
+mushrooms = [{"x":12, "y":7},{"x": 23, "y":5},{"x":68, "y":12}, {"x":12, "y":15}, {"x":25, "y":2}]
     
 #-----------------------------------------------------------------------------
 # Global constants:
@@ -143,9 +143,17 @@ def draw_snakes():
         for snake_pos in snake[:-1]:
             put(snake_pos,snake_body_sym)
         put(snake[-1], snake_head_sym)
-        
+
 #-----------------------------------------------------------------------------
-#draw and move spiders
+# draw mushrooms
+#-----------------------------------------------------------------------------
+
+def draw_mushrooms():
+    for pos in mushrooms:
+        put(pos, mushroom_sym)
+
+#-----------------------------------------------------------------------------
+# draw and move spiders
 #-----------------------------------------------------------------------------
 def draw_spiders():
     for spider_pos in spiders:
@@ -214,9 +222,9 @@ while True:
     draw_bullets()
 
     # Draw spiders
-    draw_spiders()
-    
+    draw_spiders()    
     draw_snakes()
+    draw_mushrooms()
 
     # draw screen and then wait
     scr.refresh()

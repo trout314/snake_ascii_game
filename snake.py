@@ -80,8 +80,8 @@ spiders = [
 ]
 
 snakes = [
-    [{"x":2, "y":2}, {"x":3, "y":2}, {"x":4, "y":2}, {"x":5, "y":2}],
-    [{"x":5, "y":3}, {"x":6, "y":3}, {"x":7, "y":3}, {"x":8, "y":3}]
+    [{"x":12, "y":2}, {"x":13, "y":2}, {"x":14, "y":2}, {"x":15, "y":2}],
+    [{"x":5, "y":3}, {"x":6, "y":3}, {"x":7, "y":3}, {"x":8, "y":3}, {"x":9, "y":3}]
 ]
 
 mushrooms = [{"x":12, "y":7},{"x": 23, "y":5},{"x":68, "y":12},{"x":12, "y":15}]
@@ -103,7 +103,7 @@ bullet_sym = "*"
 spider_sym = "S"
 mushroom_sym = "M"
 
-time_delay = 0.03
+time_delay = 0.5
 
 key_actions = {
     'q' : exit,
@@ -114,6 +114,23 @@ key_actions = {
     'd' : move_player_right,
     ' ' : add_bullet
 }
+
+#-----------------------------------------------------------------------------
+#draw and move snakes
+#-----------------------------------------------------------------------------
+
+def move_snakes():
+    global snakes
+    for snake in snakes:
+        head_pos = dict(snake[-1])
+        if (head_pos["y"] % 2 == 0) and (head_pos["x"] < max_x):
+            head_pos["x"] += 1
+        elif head_pos["x"] > 0:
+            head_pos["x"] -= 1
+
+        put(snake[0], " ")
+        del snake[0]
+        snake.append(head_pos)
 
 #-----------------------------------------------------------------------------
 #draw and move spiders
@@ -208,6 +225,8 @@ while True:
     move_bullets()
 
     move_spiders()
+
+    move_snakes()
     
     # resolve consequences of collisions.
     # NOTE: some of these may be best handled by putting code elsewhere

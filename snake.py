@@ -2,6 +2,30 @@ from setup import *
 import curses    # for displaying text to screen
 import time      # for time related tasts
 import random    # for choosing a random character movement direction
+
+
+#-----------------------------------------------------------------------------
+# Global constants:
+#     In this section we will put data items that the whole program will need
+#     but that should not be changed during the game.
+#-----------------------------------------------------------------------------
+
+# limits for display area
+min_x, max_x = 0, 79
+min_y, max_y = 0, 23
+
+num_mushrooms = 20
+
+snake_head_sym = "O"
+snake_body_sym = "o"
+player_sym = "@"
+bullet_sym = "*"
+spider_sym = "S"
+mushroom_sym = "M"
+
+time_delay = 0.05
+
+
 #-----------------------------------------------------------------------------
 # Some little helper functions
 #-----------------------------------------------------------------------------
@@ -84,34 +108,11 @@ snakes = [
     [{"x": i, "y": 4} for i in range(20, 45)]
 ]
 
-mushrooms = [{"x":12, "y":7},{"x": 23, "y":5},{"x":68, "y":12}, {"x":12, "y":15}, {"x":25, "y":2}]
-
-num_mushrooms = 20
-
-
+mushrooms = []
 for i in range(num_mushrooms):
     rand_pos = {"x" : random.choice(range(0, max_x)), "y" : random.choice(range(0,max_y))}
     mushrooms.append(rand_pos)
     
-#-----------------------------------------------------------------------------
-# Global constants:
-#     In this section we will put data items that the whole program will need
-#     but that should not be changed during the game.
-#-----------------------------------------------------------------------------
-
-# limits for display area
-min_x, max_x = 0, 79
-min_y, max_y = 0, 23
-
-snake_head_sym = "O"
-snake_body_sym = "o"
-player_sym = "@"
-bullet_sym = "*"
-spider_sym = "S"
-mushroom_sym = "M"
-
-time_delay = 0.05
-
 key_actions = {
     'q' : exit,
     'Q' : exit,

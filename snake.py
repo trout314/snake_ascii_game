@@ -195,6 +195,10 @@ def move_spiders():
     for spider_pos in spiders:
         random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spider_pos)
 
+#-----------------------------------------------------------------------------
+# Resolve collisions
+#-----------------------------------------------------------------------------
+
 def do_spider_bullet_collisions():
     global bullets
     global spiders
@@ -204,6 +208,18 @@ def do_spider_bullet_collisions():
 
     spiders=new_spiders
     bullets=new_bullets
+
+def do_mushroom_bullet_collisions():
+    global bullets
+    global mushrooms
+
+    new_mushrooms = [pos for pos in mushrooms if not pos in bullets]
+    new_bullets = [pos for pos in bullets if not pos in mushrooms]
+
+    mushrooms = new_mushrooms
+    bullets = new_bullets
+
+
 #-----------------------------------------------------------------------------
 # Main game code
 #-----------------------------------------------------------------------------
@@ -243,6 +259,7 @@ while True:
     
     # perform other movements
     do_spider_bullet_collisions()
+    do_mushroom_bullet_collisions()
 
     move_bullets()
 

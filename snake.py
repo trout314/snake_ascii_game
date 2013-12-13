@@ -159,15 +159,14 @@ def move_spiders():
         random.choice([move_spider_right,move_spider_left, move_spider_down, move_spider_up])(spider_pos)
 
 def remove_spiders():
-    for bullet_pos in bullets:
-        global bullets
-        global spiders
+    global bullets
+    global spiders
 
-        new_spiders=[pos for pos in spiders if not pos in bullets]
-        new_bullets=[pos for pos in bullets if not pos in spiders]
+    new_spiders=[pos for pos in spiders if not pos in bullets]
+    new_bullets=[pos for pos in bullets if not pos in spiders]
 
-        spiders=new_spiders
-        bullets=new_bullets
+    spiders=new_spiders
+    bullets=new_bullets
 #-----------------------------------------------------------------------------
 # Main game code
 #-----------------------------------------------------------------------------

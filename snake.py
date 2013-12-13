@@ -85,6 +85,13 @@ snakes = [
 ]
 
 mushrooms = [{"x":12, "y":7},{"x": 23, "y":5},{"x":68, "y":12}, {"x":12, "y":15}, {"x":25, "y":2}]
+
+num_mushrooms = 20
+
+
+for i in range(num_mushrooms):
+    rand_pos = {"x" : random.choice(range(0, max_x)), "y" : random.choice(range(0,max_y))}
+    mushrooms.append(rand_pos)
     
 #-----------------------------------------------------------------------------
 # Global constants:

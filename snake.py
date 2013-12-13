@@ -132,6 +132,12 @@ def move_snakes():
         del snake[0]
         snake.append(head_pos)
 
+def draw_snakes():
+    for snake in snakes:
+        for snake_pos in snake[:-1]:
+            put(snake_pos,snake_body_sym)
+        put(snake[-1], snake_head_sym)
+        
 #-----------------------------------------------------------------------------
 #draw and move spiders
 #-----------------------------------------------------------------------------
@@ -203,6 +209,8 @@ while True:
 
     # Draw spiders
     draw_spiders()
+    
+    draw_snakes()
 
     # draw screen and then wait
     scr.refresh()
